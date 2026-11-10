@@ -8,6 +8,7 @@ import com.sky.enumeration.OperationType;
 import com.sky.vo.DishVO;
 import org.apache.ibatis.annotations.Delete;
 import org.apache.ibatis.annotations.Mapper;
+import org.apache.ibatis.annotations.ResultType;
 import org.apache.ibatis.annotations.Select;
 
 import java.util.List;
@@ -33,8 +34,33 @@ public interface DishMapper {
      */
     Page<DishVO> pageQuery(DishPageQueryDTO dishPageQueryDTO);
 
+    /**
+     * 根据ids获取数据
+     * @param ids
+     * @return
+     */
     List<Dish> getByIds(List<Long> ids);
 
+    /**
+     * 根据id删除数据
+     * @param id
+     */
     @Delete("delete from dish where id = #{id}")
     void deleteById(Long id);
+
+    /**
+     * 根据id获取单个数据
+     * @param id
+     * @return
+     */
+    @Select("select * from dish where id = #{id}")
+    @ResultType(Dish.class)
+    Dish getById(Long id);
+
+    /**
+     * 更新菜品
+     * @param dish
+     */
+    @AutoFill(value = OperationType.UPDATE)
+    void update(Dish dish);
 }
