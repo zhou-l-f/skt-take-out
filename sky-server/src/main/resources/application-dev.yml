@@ -11,3 +11,7 @@ sky:
     access-key-secret: ${ALIYUN_KEY_SECRET}
     bucket-name: sky-take-out-zlf556
     endpoint: oss-cn-hangzhou.aliyuncs.com
+  redis:
+    host: localhost
+    port: 6379
+    database: 0
